@@ -4,7 +4,6 @@ import { FEATURES, SITE } from "@/data/site";
 import hero from "@/assets/exterior.jpg.asset.json";
 import interior2 from "@/assets/interior2.jpg.asset.json";
 import interior3 from "@/assets/interior3.jpg.asset.json";
-import p3 from "@/assets/p3.jpg.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -61,7 +60,7 @@ function AboutPage() {
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-4 px-5 pb-24 md:grid-cols-3">
-        {[interior2, p3, interior3].map((img, i) => (
+        {[interior2, { url: "/images/team.jpg" }, interior3].map((img, i) => (
           <img
             key={img.url}
             src={img.url}

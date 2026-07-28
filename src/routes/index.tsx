@@ -16,7 +16,6 @@ import dia from "@/assets/dia.jpg.asset.json";
 import p1 from "@/assets/p1.jpg.asset.json";
 import p2 from "@/assets/p2.jpg.asset.json";
 import c1 from "@/assets/c1.jpg.asset.json";
-import c2 from "@/assets/c2.jpg.asset.json";
 import video from "@/assets/video.mp4.asset.json";
 import { REVIEWS, SITE } from "@/data/site";
 
@@ -79,7 +78,20 @@ const SIGNATURES = [
   },
 ];
 
-const GALLERY = [interior1, interior2, dia, p1, c1, interior3, p2, c2];
+const GALLERY = [
+  interior1,
+  interior2,
+  p1,
+  c1,
+  interior3,
+  p2,
+  { url: "/images/drinks.jpg" },
+  { url: "/images/place-dish.jpg" },
+  { url: "/images/place-menu.jpg" },
+  { url: "/images/place-table.jpg" },
+  { url: "/images/place-terrace.jpg" },
+  { url: "/images/a2.jpg" },
+];
 
 function Index() {
   return (
@@ -163,7 +175,7 @@ function Index() {
           </div>
           <div className="relative">
             <img
-              src={interior1.url}
+              src={interior3.url}
               alt="Dining room of Advans Cafe Restaurante"
               className="h-[520px] w-full object-cover"
               loading="lazy"
@@ -272,13 +284,13 @@ function Index() {
           <p className="overline">The place</p>
           <h2 className="mt-5 text-4xl sm:text-5xl">Moments at Advans</h2>
         </div>
-        <div className="mt-14 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
           {GALLERY.map((img, i) => (
             <img
               key={img.url}
               src={img.url}
               alt={`Advans Cafe Restaurante impression ${i + 1}`}
-              className={`w-full object-cover ${i % 5 === 0 ? "h-80" : "h-56"}`}
+              className="aspect-[4/5] w-full border border-gold/35 bg-card p-1 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition duration-500 hover:scale-[1.02] hover:border-gold/70"
               loading="lazy"
             />
           ))}
