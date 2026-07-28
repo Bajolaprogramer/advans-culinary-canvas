@@ -1,0 +1,264 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { toast } from "sonner";
+
+import { supabase } from "@/integrations/supabase/client";
+import { HOURS, RESERVATION_TIMES, SITE } from "@/data/site";
+import hero from "@/assets/interior2.jpg.asset.json";
+
+export const Route = createFileRoute("/reservations")({
+  head: () => ({
+    meta: [
+      { title: "Book a Table | Advans Cafe Restaurante Puerto de la Cruz" },
+      {
+        name: "description",
+        content:
+          "Reserve your table online at Advans Cafe Restaurante, Calle Cólogan 3, Puerto de la Cruz. Lunch and dinner service, closed Mondays.",
+      },
+      { property: "og:title", content: "Book a Table at Advans Cafe Restaurante" },
+      {
+        property: "og:description",
+        content: "Online reservations for lunch and dinner in Puerto de la Cruz, Tenerife.",
+      },
+    ],
+  }),
+  component: ReservationsPage,
+});
+
+const today = () => new Date().toISOString().slice(0, 10);
+
+function ReservationsPage() {
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    party_size: "2",
+    reservation_date: today(),
+    reservation_time: "20:00",
+    notes: "",
+  });
+
+  const update = (key: keyof typeof form, value: string) =>
+    setForm((f) => ({ ...f, [key]: value }));
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+
+    const { error } = await supabase.from("reservations").insert({
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim() || null,
+      party_size: Number(form.party_size),
+      reservation_date: form.reservation_date,
+      reservation_time: form.reservation_time,
+      notes: form.notes.trim() || null,
+    });
+
+    setSubmitting(false);
+
+    if (error) {
+      toast.error("We couldn't send your request. Please call us instead.");
+      return;
+    }
+
+    setDone(true);
+    toast.success("Reservation request received — we'll confirm shortly.");
+  }
+
+  const field =
+    "w-full border border-input bg-background/60 px-4 py-3 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-gold";
+  const label = "block text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground";
+
+  return (
+    <>
+      <section className="relative flex h-[44vh] items-center justify-center overflow-hidden">
+        <img
+          src={hero.url}
+          alt="Table set for dinner at Advans Cafe Restaurante"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-veil)" }} />
+        <div className="relative px-5 text-center">
+          <p className="overline">Online booking</p>
+          <h1 className="mt-5 text-5xl sm:text-6xl text-gold-gradient">Reserve a table</h1>
+        </div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl gap-14 px-5 py-24 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="card-lux p-8 sm:p-10">
+          {done ? (
+            <div className="py-16 text-center">
+              <h2 className="text-4xl text-gold-gradient">Thank you</h2>
+              <p className="mx-auto mt-6 max-w-md text-sm leading-relaxed text-muted-foreground">
+                Your request for {form.party_size} guests on {form.reservation_date} at{" "}
+                {form.reservation_time} has been received. We will confirm by email or phone
+                shortly. For same-day bookings please call {SITE.phone}.
+              </p>
+              <button
+                type="button"
+                onClick={() => setDone(false)}
+                className="mt-10 border border-gold/50 px-8 py-4 text-xs uppercase tracking-[0.28em] text-gold transition-colors hover:bg-gold/10"
+              >
+                Make another booking
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={onSubmit} className="space-y-7">
+              <div className="grid gap-7 sm:grid-cols-2">
+                <div>
+                  <label className={label} htmlFor="name">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    required
+                    maxLength={120}
+                    value={form.name}
+                    onChange={(e) => update("name", e.target.value)}
+                    className={`${field} mt-3`}
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div>
+                  <label className={label} htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    maxLength={200}
+                    value={form.email}
+                    onChange={(e) => update("email", e.target.value)}
+                    className={`${field} mt-3`}
+                    placeholder="you@email.com"
+                  />
+                </div>
+                <div>
+                  <label className={label} htmlFor="phone">
+                    Phone (optional)
+                  </label>
+                  <input
+                    id="phone"
+                    maxLength={40}
+                    value={form.phone}
+                    onChange={(e) => update("phone", e.target.value)}
+                    className={`${field} mt-3`}
+                    placeholder="+34 ..."
+                  />
+                </div>
+                <div>
+                  <label className={label} htmlFor="party">
+                    Guests
+                  </label>
+                  <select
+                    id="party"
+                    value={form.party_size}
+                    onChange={(e) => update("party_size", e.target.value)}
+                    className={`${field} mt-3`}
+                  >
+                    {Array.from({ length: 12 }).map((_, i) => (
+                      <option key={i + 1} value={String(i + 1)}>
+                        {i + 1} {i === 0 ? "guest" : "guests"}
+                      </option>
+                    ))}
+                    <option value="15">More than 12 (group)</option>
+                  </select>
+                </div>
+                <div>
+                  <label className={label} htmlFor="date">
+                    Date
+                  </label>
+                  <input
+                    id="date"
+                    type="date"
+                    required
+                    min={today()}
+                    value={form.reservation_date}
+                    onChange={(e) => update("reservation_date", e.target.value)}
+                    className={`${field} mt-3`}
+                  />
+                </div>
+                <div>
+                  <label className={label} htmlFor="time">
+                    Time
+                  </label>
+                  <select
+                    id="time"
+                    value={form.reservation_time}
+                    onChange={(e) => update("reservation_time", e.target.value)}
+                    className={`${field} mt-3`}
+                  >
+                    {RESERVATION_TIMES.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className={label} htmlFor="notes">
+                  Special requests (optional)
+                </label>
+                <textarea
+                  id="notes"
+                  rows={4}
+                  maxLength={1000}
+                  value={form.notes}
+                  onChange={(e) => update("notes", e.target.value)}
+                  className={`${field} mt-3 resize-none`}
+                  placeholder="Allergies, celebrations, terrace seating…"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-gold-gradient py-4 text-xs uppercase tracking-[0.28em] text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+              >
+                {submitting ? "Sending…" : "Request reservation"}
+              </button>
+              <p className="text-center text-xs text-muted-foreground">
+                Requests are confirmed by our team. Same-day booking? Call {SITE.phone}.
+              </p>
+            </form>
+          )}
+        </div>
+
+        <aside>
+          <p className="overline">Service hours</p>
+          <h2 className="mt-5 text-3xl">When to join us</h2>
+          <ul className="mt-8 space-y-4 text-sm">
+            {HOURS.map((h) => (
+              <li
+                key={h.day}
+                className="flex justify-between gap-6 border-b border-border/50 pb-3 last:border-0"
+              >
+                <span className="text-muted-foreground">{h.day}</span>
+                <span className="text-right text-foreground/90">{h.hours.join(" · ")}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="gold-rule my-10" />
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            {SITE.addressLine}, {SITE.city}
+          </p>
+          <a
+            href={SITE.mapsUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-4 inline-block border-b border-gold/50 pb-0.5 text-[0.65rem] uppercase tracking-[0.24em] text-gold"
+          >
+            Get directions
+          </a>
+        </aside>
+      </section>
+    </>
+  );
+}
