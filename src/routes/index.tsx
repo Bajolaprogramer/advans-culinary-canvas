@@ -24,13 +24,15 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "ADVANS Café Restaurante | Restaurante en Puerto de la Cruz",
+        title:
+          "ADVANS Café Restaurante | Restaurante en Puerto de la Cruz",
       },
       {
         name: "description",
         content:
           "ADVANS Café Restaurante en Puerto de la Cruz. Recetas tradicionales, carnes, pescado fresco, cocina casera y especialidades balcánicas.",
       },
+
       {
         property: "og:title",
         content:
@@ -45,8 +47,20 @@ export const Route = createFileRoute("/")({
         property: "og:type",
         content: "restaurant",
       },
+      {
+        property: "og:url",
+        content: "https://advanstenerife.es/",
+      },
+    ],
+
+    links: [
+      {
+        rel: "canonical",
+        href: "https://advanstenerife.es/",
+      },
     ],
   }),
+
   component: Index,
 });
 
@@ -187,17 +201,26 @@ const REVIEW_TICKER = [
 const RESTAURANT_SCHEMA = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+
+  "@id": "https://advanstenerife.es/#restaurant",
+  url: "https://advanstenerife.es/",
+
   name: "ADVANS Café Restaurante",
+
   description:
     "Restaurante en Puerto de la Cruz especializado en recetas tradicionales, cocina casera, carnes, pescado fresco, crepes y especialidades de inspiración balcánica y europea.",
-  telephone: SITE.phone,
-  priceRange: SITE.priceRange,
+
+  telephone: "+34 665 03 16 86",
+
+  priceRange: "€10–20",
+
   servesCuisine: [
     "Canarian",
     "Mediterranean",
     "Balkan",
     "European",
   ],
+
   address: {
     "@type": "PostalAddress",
     streetAddress: "C. de Cólogan, 3",
@@ -206,11 +229,13 @@ const RESTAURANT_SCHEMA = {
     addressRegion: "Santa Cruz de Tenerife",
     addressCountry: "ES",
   },
+
   geo: {
     "@type": "GeoCoordinates",
     latitude: 28.416362,
     longitude: -16.548676,
   },
+
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
@@ -225,7 +250,8 @@ const RESTAURANT_SCHEMA = {
       closes: "23:00",
     },
   ],
-  sameAs: SITE.socials.map((social) => social.href),
+
+  menu: "https://advanstenerife.es/menu",
 };
 
 function Index() {
@@ -236,12 +262,14 @@ function Index() {
 
     <>
 
-    <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(RESTAURANT_SCHEMA),
-  }}
-/>
+
+
+     <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(RESTAURANT_SCHEMA),
+      }}
+    />
 
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden">
