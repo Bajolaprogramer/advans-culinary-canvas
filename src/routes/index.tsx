@@ -91,13 +91,13 @@ const SIGNATURES = [
     price: "€12.50",
   },
   {
-    image: fav.url,
-    name: "House crêpes",
-    nameEs: "Crepés de la casa",
-    desc: "Savoury and sweet crêpes — the reason guests keep coming back.",
+    image: "signatures/signature-6.jpg",
+    name: "Osobuco",
+    nameEs: "Osobuco",
+    desc: "Cooked in its own juices with polenta, capers and tomato.",
     descEs:
-      "Crepés salados y dulces — la razón por la que nuestros clientes siempre vuelven.",
-    price: "from €5.50",
+      "Cocinado en su propio jugo con polenta, alcaparras y tomate.",
+    price: "€19.50",
   },
 ];
 
