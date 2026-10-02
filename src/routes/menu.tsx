@@ -7,20 +7,36 @@ import { useLanguage } from "@/i18n";
 export const Route = createFileRoute("/menu")({
   head: () => ({
     meta: [
-      { title: "Menu | Advans Cafe Restaurante Tenerife" },
+      {
+        title: "Menú | ADVANS Café Restaurante Puerto de la Cruz",
+      },
       {
         name: "description",
         content:
-          "Starters, soups, grilled mains, the Pljeskavica house burger and famous savoury and sweet crêpes — the full Advans menu in Puerto de la Cruz.",
+          "Descubre el menú de ADVANS Café Restaurante en Puerto de la Cruz: carnes, pescado fresco, platos caseros, especialidades balcánicas y crepes.",
       },
       {
         property: "og:title",
-        content: "Menu | Advans Cafe Restaurante",
+        content: "Menú | ADVANS Café Restaurante",
       },
       {
         property: "og:description",
         content:
-          "Canarian, Mediterranean and Balkan dishes, crêpes and grill. €10–20 per person.",
+          "Carnes, pescado fresco, cocina casera, especialidades balcánicas y crepes en Puerto de la Cruz.",
+      },
+      {
+        property: "og:type",
+        content: "restaurant.menu",
+      },
+      {
+        property: "og:url",
+        content: "https://advanstenerife.es/menu",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://advanstenerife.es/menu",
       },
     ],
   }),

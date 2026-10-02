@@ -8,20 +8,36 @@ import { useLanguage } from "@/i18n";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact & Hours | Advans Cafe Restaurante" },
+      {
+        title: "Contacto | ADVANS Café Restaurante Puerto de la Cruz",
+      },
       {
         name: "description",
         content:
-          "Find Advans Cafe Restaurante at Calle Cólogan 3, Puerto de la Cruz. Opening hours, phone +34 665 03 16 86 and directions.",
+          "Contacta con ADVANS Café Restaurante en Puerto de la Cruz. Consulta nuestra ubicación, horario, teléfono y reserva tu mesa.",
       },
       {
         property: "og:title",
-        content: "Contact Advans Cafe Restaurante",
+        content: "Contacto | ADVANS Café Restaurante",
       },
       {
         property: "og:description",
         content:
-          "Calle Cologan 3, Puerto de la Cruz, Tenerife. Open daily from 1:00 PM to 11:00 PM.",
+          "Encuentra ADVANS Café Restaurante en el centro de Puerto de la Cruz y contacta con nosotros para reservar.",
+      },
+      {
+        property: "og:type",
+        content: "restaurant",
+      },
+      {
+        property: "og:url",
+        content: "https://advanstenerife.es/contact",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://advanstenerife.es/contact",
       },
     ],
   }),

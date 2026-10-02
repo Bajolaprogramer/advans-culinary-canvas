@@ -11,21 +11,35 @@ export const Route = createFileRoute("/reservations")({
   head: () => ({
     meta: [
       {
-        title: "Book a Table | Advans Cafe Restaurante Puerto de la Cruz",
+        title: "Reservar mesa | ADVANS Café Restaurante Puerto de la Cruz",
       },
       {
         name: "description",
         content:
-          "Reserve your table online at Advans Cafe Restaurante, Calle Cólogan 3, Puerto de la Cruz. Open daily from 1:00 PM to 11:00 PM.",
+          "Reserva tu mesa online en ADVANS Café Restaurante, en C. de Cólogan, 3, Puerto de la Cruz. Consulta disponibilidad y envía tu solicitud de reserva.",
       },
       {
         property: "og:title",
-        content: "Book a Table at Advans Cafe Restaurante",
+        content: "Reservar mesa | ADVANS Café Restaurante",
       },
       {
         property: "og:description",
         content:
-          "Online reservations for lunch and dinner in Puerto de la Cruz, Tenerife.",
+          "Reserva online en ADVANS Café Restaurante en Puerto de la Cruz, Tenerife.",
+      },
+      {
+        property: "og:type",
+        content: "restaurant",
+      },
+      {
+        property: "og:url",
+        content: "https://advanstenerife.es/reservations",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://advanstenerife.es/reservations",
       },
     ],
   }),

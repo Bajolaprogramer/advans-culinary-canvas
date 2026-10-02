@@ -9,20 +9,36 @@ import { useLanguage } from "@/i18n";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Advans | Family restaurant in Puerto de la Cruz" },
+      {
+        title: "Nuestra historia | ADVANS Café Restaurante Puerto de la Cruz",
+      },
       {
         name: "description",
         content:
-          "Family-owned since 2014, Advans blends Canarian gastronomy, Mediterranean flavours and Balkan culinary heritage in Puerto de la Cruz, Tenerife.",
+          "Conoce la historia de ADVANS Café Restaurante, un negocio familiar desde 2014 que combina gastronomía canaria, mediterránea y balcánica.",
       },
       {
         property: "og:title",
-        content: "About Advans Cafe Restaurante",
+        content: "Nuestra historia | ADVANS Café Restaurante",
       },
       {
         property: "og:description",
         content:
-          "A family kitchen keeping almost-forgotten recipes alive since 2014.",
+          "Un negocio familiar desde 2014 que recupera recetas tradicionales y las combina con técnicas modernas.",
+      },
+      {
+        property: "og:type",
+        content: "restaurant",
+      },
+      {
+        property: "og:url",
+        content: "https://advanstenerife.es/about",
+      },
+    ],
+    links: [
+      {
+        rel: "canonical",
+        href: "https://advanstenerife.es/about",
       },
     ],
   }),

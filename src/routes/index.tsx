@@ -32,7 +32,6 @@ export const Route = createFileRoute("/")({
         content:
           "ADVANS Café Restaurante en Puerto de la Cruz. Recetas tradicionales, carnes, pescado fresco, cocina casera y especialidades balcánicas.",
       },
-
       {
         property: "og:title",
         content:
@@ -52,15 +51,19 @@ export const Route = createFileRoute("/")({
         content: "https://advanstenerife.es/",
       },
     ],
-
     links: [
       {
         rel: "canonical",
         href: "https://advanstenerife.es/",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(RESTAURANT_SCHEMA),
+      },
+    ],
   }),
-
   component: Index,
 });
 
@@ -493,26 +496,113 @@ function Index() {
 
       {/* Gallery */}
       <section className="mx-auto max-w-6xl px-5 py-24">
-        <div className="text-center">
-          <p className="overline">{t("thePlace")}</p>
+  <div className="text-center">
+    <p className="overline">{t("thePlace")}</p>
 
-          <h2 className="mt-5 text-4xl sm:text-5xl">
-            {t("moments")}
-          </h2>
-        </div>
+    <h2 className="mt-5 text-4xl sm:text-5xl">
+      {t("moments")}
+    </h2>
+  </div>
 
-        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {GALLERY.map((img, i) => (
-            <img
-              key={img.url}
-              src={img.url}
-              alt={`Advans Cafe Restaurante impression ${i + 1}`}
-              className="aspect-[4/5] w-full border border-gold/35 bg-card p-1 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition duration-500 hover:scale-[1.02] hover:border-gold/70"
-              loading="lazy"
-            />
-          ))}
-        </div>
-      </section>
+  <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4">
+    {GALLERY.map((img, i) => (
+      <img
+        key={img.url}
+        src={img.url}
+        alt={`Advans Cafe Restaurante impression ${i + 1}`}
+        className="aspect-[4/5] w-full border border-gold/35 bg-card p-1 object-cover shadow-[0_10px_30px_rgba(0,0,0,0.18)] transition duration-500 hover:scale-[1.02] hover:border-gold/70"
+        loading="lazy"
+      />
+    ))}
+  </div>
+</section>
+
+{/* SEO content */}
+<section className="border-y border-border/60 bg-card/30 py-24">
+  <div className="mx-auto max-w-5xl px-5">
+    <div className="text-center">
+      <p className="overline">ADVANS · Puerto de la Cruz</p>
+
+      <h2 className="mt-5 text-4xl sm:text-5xl">
+        Cocina tradicional en Puerto de la Cruz
+      </h2>
+
+      <div className="gold-rule mx-auto my-8 max-w-[140px]" />
+    </div>
+
+    <div className="space-y-12 text-base leading-relaxed text-muted-foreground">
+      <div>
+        <h3 className="text-2xl text-foreground">
+          Cocina tradicional en Puerto de la Cruz
+        </h3>
+
+        <p className="mt-4">
+          ADVANS Café Restaurante es un restaurante en Puerto de la Cruz donde
+          las recetas tradicionales se combinan con productos de calidad y una
+          cocina elaborada con cuidado. Nuestra propuesta gastronómica nace del
+          respeto por los sabores de siempre y de la pasión por ofrecer una
+          experiencia cercana y auténtica.
+        </p>
+
+        <p className="mt-4">
+          Descubre una cocina que combina tradición, producto fresco y recetas
+          elaboradas con mimo, en un ambiente acogedor en el corazón de Puerto
+          de la Cruz.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl text-foreground">
+          Carnes y platos elaborados
+        </h3>
+
+        <p className="mt-4">
+          Nuestra carta incluye diferentes opciones de carne preparadas con
+          cuidado, desde carnes a la parrilla hasta platos de elaboración
+          casera. Seleccionamos cada ingrediente buscando conservar el sabor,
+          la textura y la esencia de cada receta.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl text-foreground">
+          Pescado fresco
+        </h3>
+
+        <p className="mt-4">
+          El pescado fresco también ocupa un lugar destacado en nuestra cocina.
+          Trabajamos recetas sencillas y sabrosas que permiten disfrutar del
+          producto y de los sabores mediterráneos en Puerto de la Cruz.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl text-foreground">
+          Sabores tradicionales de los Balcanes y Europa
+        </h3>
+
+        <p className="mt-4">
+          La cocina de ADVANS reúne influencias de la gastronomía canaria,
+          mediterránea y balcánica. Esta combinación de culturas se refleja en
+          platos tradicionales y especialidades europeas que aportan una
+          personalidad propia a nuestra carta.
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-2xl text-foreground">
+          Crepes salados y dulces
+        </h3>
+
+        <p className="mt-4">
+          Los crepes son una de nuestras especialidades. Encontrarás opciones
+          saladas y dulces preparadas al momento, ideales tanto para disfrutar
+          de una comida como para terminar la experiencia con algo especial.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* CTA */}
       <section className="relative overflow-hidden py-28">
