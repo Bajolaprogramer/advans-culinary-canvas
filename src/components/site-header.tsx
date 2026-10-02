@@ -3,15 +3,17 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png.asset.json";
 import { SITE } from "@/data/site";
+import { useLanguage } from "@/i18n";
 
 const NAV = [
-  { to: "/", label: "Home" },
-  { to: "/menu", label: "Menu" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", key: "home" },
+  { to: "/menu", key: "menu" },
+  { to: "/about", key: "about" },
+  { to: "/contact", key: "contact" },
 ] as const;
 
 export function SiteHeader() {
+  const { language, setLanguage, t } = useLanguage();
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,14 +37,14 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-9 md:flex">
           {NAV.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-gold [&.active]:text-gold"
-            >
-              {item.label}
-            </Link>
-          ))}
+  <Link
+    key={item.to}
+    to={item.to}
+    className="text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-gold [&.active]:text-gold"
+  >
+    {t(item.key)}
+  </Link>
+))}
           <Link
             to="/reservations"
             className="border border-gold/60 px-5 py-2.5 text-xs uppercase tracking-[0.24em] text-gold transition-colors hover:bg-gold hover:text-primary-foreground"
@@ -52,28 +54,28 @@ export function SiteHeader() {
         </nav>
 
         <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
-          className="text-gold md:hidden"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+  type="button"
+  onClick={() => setLanguage(language === "en" ? "es" : "en")}
+  aria-label={language === "en" ? "Cambiar a español" : "Switch to English"}
+  title={language === "en" ? "Español" : "English"}
+  className="ml-2 text-lg leading-none transition-transform hover:scale-110"
+>
+  {language === "en" ? "🇪🇸" : "🇬🇧"}
+</button>
       </div>
 
       {open && (
         <div className="border-t border-border/60 bg-background md:hidden">
           <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-4">
-            {[...NAV, { to: "/reservations", label: "Reserve a table" } as const].map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setOpen(false)}
-                className="py-3 text-sm uppercase tracking-[0.22em] text-muted-foreground [&.active]:text-gold"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => (
+  <Link
+    key={item.to}
+    to={item.to}
+    className="text-xs uppercase tracking-[0.24em] text-muted-foreground transition-colors hover:text-gold [&.active]:text-gold"
+  >
+    {t(item.key)}
+  </Link>
+))}
             <a
               href={SITE.phoneHref}
               className="py-3 text-sm uppercase tracking-[0.22em] text-gold"

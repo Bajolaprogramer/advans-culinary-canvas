@@ -4,6 +4,7 @@ import { FEATURES, SITE } from "@/data/site";
 import hero from "@/assets/exterior.jpg.asset.json";
 import interior2 from "@/assets/interior2.jpg.asset.json";
 import interior3 from "@/assets/interior3.jpg.asset.json";
+import { useLanguage } from "@/i18n";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -14,10 +15,14 @@ export const Route = createFileRoute("/about")({
         content:
           "Family-owned since 2014, Advans blends Canarian gastronomy, Mediterranean flavours and Balkan culinary heritage in Puerto de la Cruz, Tenerife.",
       },
-      { property: "og:title", content: "About Advans Cafe Restaurante" },
+      {
+        property: "og:title",
+        content: "About Advans Cafe Restaurante",
+      },
       {
         property: "og:description",
-        content: "A family kitchen keeping almost-forgotten recipes alive since 2014.",
+        content:
+          "A family kitchen keeping almost-forgotten recipes alive since 2014.",
       },
     ],
   }),
@@ -25,83 +30,111 @@ export const Route = createFileRoute("/about")({
 });
 
 function AboutPage() {
+  const { t, language } = useLanguage();
+
   return (
     <>
+      {/* Hero */}
       <section className="relative flex h-[52vh] items-center justify-center overflow-hidden">
         <img
           src={hero.url}
           alt="Street view of Advans Cafe Restaurante in Puerto de la Cruz"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0" style={{ backgroundImage: "var(--gradient-veil)" }} />
+
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: "var(--gradient-veil)" }}
+        />
+
         <div className="relative px-5 text-center">
-          <p className="overline">Negocio familiar desde {SITE.since}</p>
-          <h1 className="mt-5 text-5xl sm:text-6xl text-gold-gradient">Our story</h1>
+          <p className="overline">
+            {language === "es"
+              ? `Negocio familiar desde ${SITE.since}`
+              : `Family business since ${SITE.since}`}
+          </p>
+
+          <h1 className="mt-5 text-5xl text-gold-gradient sm:text-6xl">
+            {t("ourStory")}
+          </h1>
         </div>
       </section>
 
+      {/* Story */}
       <section className="mx-auto max-w-3xl px-5 py-24 text-center">
         <h2 className="text-4xl sm:text-5xl">
-          Traditional recipes, modern techniques, exceptional flavours
+          {language === "es"
+            ? "Recetas tradicionales, técnicas modernas y sabores excepcionales"
+            : "Traditional recipes, modern techniques, exceptional flavours"}
         </h2>
+
         <div className="gold-rule mx-auto my-9 max-w-[140px]" />
+
         <p className="text-base leading-relaxed text-muted-foreground">
-          At Advans we are passionate about keeping culinary traditions alive. We rescue
-          almost-forgotten traditional recipes and reinvent them with respect — preserving their
-          essence, authentic flavour and presentation — while always using fresh, locally sourced
-          ingredients.
+          {language === "es"
+            ? "En Advans nos apasiona mantener vivas las tradiciones culinarias. Recuperamos recetas tradicionales casi olvidadas y las reinventamos con respeto, conservando su esencia, sabor auténtico y presentación, mientras utilizamos siempre ingredientes frescos y de proximidad."
+            : "At Advans we are passionate about keeping culinary traditions alive. We rescue almost-forgotten traditional recipes and reinvent them with respect — preserving their essence, authentic flavour and presentation — while always using fresh, locally sourced ingredients."}
         </p>
+
         <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-          Our cuisine is a unique fusion of Canarian gastronomy, Mediterranean flavours and the rich
-          culinary heritage of the Balkans. Every dish reflects our passion for tradition, quality
-          and fine craftsmanship. This combination of cultures and flavours is what makes Advans a
-          unique dining experience in Puerto de la Cruz and across Tenerife.
+          {language === "es"
+            ? "Nuestra cocina es una fusión única de gastronomía canaria, sabores mediterráneos y la rica tradición culinaria de los Balcanes. Cada plato refleja nuestra pasión por la tradición, la calidad y la artesanía culinaria. Esta combinación de culturas y sabores es lo que convierte a Advans en una experiencia gastronómica única en Puerto de la Cruz y en Tenerife."
+            : "Our cuisine is a unique fusion of Canarian gastronomy, Mediterranean flavours and the rich culinary heritage of the Balkans. Every dish reflects our passion for tradition, quality and fine craftsmanship. This combination of cultures and flavours is what makes Advans a unique dining experience in Puerto de la Cruz and across Tenerife."}
         </p>
       </section>
 
+      {/* Images */}
       <section className="mx-auto grid max-w-6xl gap-4 px-5 pb-24 md:grid-cols-3">
-        {[interior2, { url: "/images/team.jpg" }, interior3].map((img, i) => (
-          <img
-            key={img.url}
-            src={img.url}
-            alt={`Inside Advans Cafe Restaurante ${i + 1}`}
-            className="h-80 w-full object-cover"
-            loading="lazy"
-          />
-        ))}
+        {[interior2, { url: "/images/team.jpg" }, interior3].map(
+          (img, i) => (
+            <img
+              key={img.url}
+              src={img.url}
+              alt={`Inside Advans Cafe Restaurante ${i + 1}`}
+              className="h-80 w-full object-cover"
+              loading="lazy"
+            />
+          ),
+        )}
       </section>
 
+      {/* Features */}
       <section className="border-y border-border/60 bg-card/30 py-24">
         <div className="mx-auto max-w-4xl px-5 text-center">
-          <p className="overline">Good to know</p>
-          <h2 className="mt-5 text-4xl">What we offer</h2>
+          <p className="overline">{t("goodToKnow")}</p>
+
+          <h2 className="mt-5 text-4xl">{t("whatWeOffer")}</h2>
+
           <ul className="mt-12 grid gap-4 sm:grid-cols-2">
             {FEATURES.map((f) => (
-              <li
-                key={f}
-                className="card-lux px-6 py-5 text-sm tracking-wide text-muted-foreground"
-              >
-                {f}
-              </li>
-            ))}
+  <li
+    key={f.name}
+    className="card-lux px-6 py-5 text-sm tracking-wide text-muted-foreground"
+  >
+    {language === "es" ? f.nameEs : f.name}
+  </li>
+))}
           </ul>
         </div>
       </section>
 
+      {/* CTA */}
       <section className="mx-auto max-w-2xl px-5 py-24 text-center">
-        <h2 className="text-4xl">Come and taste the story</h2>
+        <h2 className="text-4xl">{t("comeTaste")}</h2>
+
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <Link
             to="/reservations"
             className="bg-gold-gradient px-8 py-4 text-xs uppercase tracking-[0.28em] text-primary-foreground transition-opacity hover:opacity-90"
           >
-            Reserve a table
+            {t("reserveTable")}
           </Link>
+
           <Link
             to="/menu"
             className="border border-gold/50 px-8 py-4 text-xs uppercase tracking-[0.28em] text-gold transition-colors hover:bg-gold/10"
           >
-            Browse the menu
+            {t("browseMenu")}
           </Link>
         </div>
       </section>
