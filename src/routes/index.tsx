@@ -48,7 +48,7 @@ export const Route = createFileRoute("/")({
 
 const SIGNATURES = [
   {
-    image: entrecot.url,
+    image: "/signatures/signature-1.png",
     name: "Entrecot de novillo",
     nameEs: "Entrecot de novillo",
     desc: "Prime beef entrecôte, grilled over fire, potatoes and garden salad.",
@@ -57,7 +57,7 @@ const SIGNATURES = [
     price: "€16.80",
   },
   {
-    image: lubina.url,
+    image: "/signatures/signature-4.jpg",
     name: "Fresh sea bass",
     nameEs: "Lubina fresca",
     desc: "Atlantic sea bass fillet with sautéed vegetables.",
@@ -65,7 +65,7 @@ const SIGNATURES = [
     price: "€18.50",
   },
   {
-    image: pollo.url,
+    image:  "/signatures/signature-3.jpg",
     name: "Chicken breast",
     nameEs: "Pechuga de pollo",
     desc: "Chicken breast, homemade mushroom sauce, sautéed potatoes.",
@@ -83,7 +83,7 @@ const SIGNATURES = [
     price: "€13.80",
   },
   {
-    image: burger.url,
+    image: "signatures/signature-5.jpg",
     name: "Pljeskavica",
     nameEs: "Pljeskavica",
     desc: "200 g Balkan-style burger, cheese, tomato, red onion, lettuce.",

@@ -7,7 +7,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { X } from "lucide-react";
 
 import { LanguageProvider } from "@/i18n";
 
@@ -135,19 +136,60 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [preview, setPreview] = useState<{ src: string; alt: string } | null>(null);
+
+  useEffect(() => {
+    if (!preview) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setPreview(null);
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [preview]);
 
   return (
     <QueryClientProvider client={queryClient}>
       <div className="flex min-h-screen flex-col bg-background">
         <LanguageProvider>
         <SiteHeader />
-        <main className="flex-1">
+        <main
+          className="flex-1 [&_img]:cursor-zoom-in"
+          onClick={(event) => {
+            const target = event.target;
+            if (target instanceof HTMLImageElement && !target.closest("[data-image-preview]")) {
+              setPreview({ src: target.currentSrc || target.src, alt: target.alt });
+            }
+          }}
+        >
           {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
           <Outlet />
         </main>
         <SiteFooter />
         </LanguageProvider>
       </div>
+      {preview && (
+        <div
+          data-image-preview
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-8"
+          role="presentation"
+          onClick={() => setPreview(null)}
+        >
+          <button
+            type="button"
+            aria-label="Zatvori pregled slike"
+            className="absolute right-4 top-4 z-10 rounded-full bg-black/50 p-3 text-white transition hover:bg-black/80"
+            onClick={() => setPreview(null)}
+          >
+            <X className="h-6 w-6" />
+          </button>
+          <img
+            src={preview.src}
+            alt={preview.alt}
+            className="max-h-full max-w-full cursor-zoom-out object-contain"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
       <Toaster position="top-center" />
     </QueryClientProvider>
   );
