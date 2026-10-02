@@ -81,7 +81,7 @@ story2:
     serviceHours: "Service hours",
     whenToJoin: "When to join us",
 
-    closeMondays: "Closed Mondays · Open from 1:00 PM",
+    closeMondays: "Open daily, 1:00 PM to 11:00 PM",
 
     reservationError:
       "We couldn't send your request. Please call us instead.",
@@ -172,7 +172,7 @@ story2:
     serviceHours: "Horario de servicio",
     whenToJoin: "Cuándo visitarnos",
 
-    closeMondays: "Cerrado los lunes · Abierto desde las 13:00",
+    closeMondays: "Abierto todos los dias, 13:00 a 23:00",
 
     reservationError:
       "No hemos podido enviar tu solicitud. Llámanos directamente.",

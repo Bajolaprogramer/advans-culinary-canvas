@@ -16,7 +16,7 @@ import dia from "@/assets/dia.jpg.asset.json";
 import p1 from "@/assets/p1.jpg.asset.json";
 import p2 from "@/assets/p2.jpg.asset.json";
 import c1 from "@/assets/c1.jpg.asset.json";
-import video from "@/assets/video.mp4.asset.json";
+
 import { REVIEWS, SITE } from "@/data/site";
 import { useLanguage } from "@/i18n";
 
@@ -115,6 +115,69 @@ const GALLERY = [
   { url: "/gallery/gallery-11.jpg" },
   { url: "/gallery/gallery-10.jpg" },
   { url: "/gallery/gallery-12.jpg" },
+];
+
+const REVIEW_TICKER = [
+  {
+    quote:
+      "Advans is definitely one of the best restaurants in Tenerife. Excellent food, especially the Serbian specialties, outstanding pancakes, generous portions and very friendly staff.",
+    author: "Lazar Bajić",
+  },
+  {
+    quote:
+      "The entrecôte was cooked perfectly and came with tasty potatoes and a fresh salad. The Canarian-style dessert with crêpes, banana and ice cream was the perfect way to finish the meal.",
+    author: "Nataliia Kuzkova",
+  },
+  {
+    quote:
+      "Very nice! We ate here twice, the staff is very friendly and the food is delicious with generous portions!",
+    author: "Miruna Drelciuc",
+  },
+  {
+    quote:
+      "Fish soup is excellent, fresh salad also. Sarma is TOP. Pedro, Saša and the team are amazing!",
+    author: "Danijela Crnkovic",
+  },
+  {
+    quote:
+      "This place is awesome. The owners are super kind and always ready to help and give advice on what to eat. The pancakes are especially interesting to try. 10/10!",
+    author: "Anja Pilipovic",
+  },
+  {
+    quote:
+      "A great spot for delicious pancakes and crepes. They also offer gluten-free crepes which tasted amazing. Service was great and we were served quickly.",
+    author: "Hannah Pickford",
+  },
+  {
+    quote:
+      "There was 8 of us and the staff were really helpful and friendly. The goulash was absolutely scrumptious. We all enjoyed our food and the atmosphere.",
+    author: "D K Manning",
+  },
+  {
+    quote:
+      "I highly recommend this place! The tastiest Balkan food, really big pljeskavica, delicious crepes and very friendly people.",
+    author: "Vera Anic",
+  },
+  {
+    quote:
+      "Genuinely the best meal of an 8-day trip to Tenerife. The depth of flavour was sublime, and the staff were incredibly friendly and welcoming.",
+    author: "Freddie",
+  },
+  {
+    quote:
+      "Such a lovely surprise to stumble upon this little corner. Homemade food, flavours from home and so many dishes I'd love to try.",
+    author: "Nina I.",
+  },
+  {
+    quote:
+      "Super friendly staff. The food is superb. Juicy burgers, traditional Balkan pancakes and everything was perfect. We will definitely come again!",
+    author: "Sanja Mašinović",
+  },
+  {
+    quote:
+      "Good selection of savoury and sweet crepes, large portions and very friendly service.",
+    author: "Nicholle SL Tan",
+  },
 ];
 
 function Index() {
@@ -297,27 +360,45 @@ function Index() {
         </div>
       </section>
 
-      {/* Video */}
-      <section className="mx-auto max-w-6xl px-5 py-24">
-        <div className="relative overflow-hidden">
-          <video
-            src={video.url}
-            className="h-[60vh] w-full object-cover"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-          />
+      {/* Review ticker */}
+<section className="overflow-hidden border-y border-border/60 bg-card/30 py-14">
+  <div className="mb-8 text-center">
+    <p className="overline">{t("guestWords")}</p>
 
-          <div
-            className="pointer-events-none absolute inset-0 flex items-end justify-center pb-12"
-            style={{ backgroundImage: "var(--gradient-veil)" }}
-          >
-            
+    <h2 className="mt-4 text-3xl sm:text-4xl">
+      {t("lovedPuerto")}
+    </h2>
+  </div>
+
+  <div className="relative overflow-hidden">
+    <div className="review-ticker flex w-max">
+      {[...REVIEW_TICKER, ...REVIEW_TICKER].map((review, index) => (
+        <article
+          key={`${review.author}-${index}`}
+          className="mx-3 w-[320px] shrink-0 border border-gold/20 bg-background/70 p-6 sm:w-[420px]"
+        >
+          <div className="flex gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star
+                key={i}
+                size={14}
+                className="fill-gold text-gold"
+              />
+            ))}
           </div>
-        </div>
-      </section>
+
+          <blockquote className="mt-4 text-sm leading-relaxed text-foreground/90">
+            “{review.quote}”
+          </blockquote>
+
+          <p className="mt-5 text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground">
+            {review.author} · Google Review
+          </p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* Reviews */}
       <section className="border-y border-border/60 bg-card/30 py-24">
@@ -400,7 +481,7 @@ function Index() {
 
           <p className="mt-5 text-base text-muted-foreground">
             {SITE.addressLine}, {SITE.city} ·{" "}
-            {language === "es" ? "Cerrado los lunes" : "Closed Mondays"}
+            Open daily, 1:00 PM to 11:00 PM
           </p>
 
           <Link

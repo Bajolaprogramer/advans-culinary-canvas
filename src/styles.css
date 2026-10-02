@@ -242,3 +242,29 @@
 @utility slow-zoom {
   animation: slow-zoom 22s ease-in-out infinite alternate;
 }
+
+
+
+.review-ticker {
+  animation: review-scroll 90s linear infinite;
+}
+
+.review-ticker:hover {
+  animation-play-state: paused;
+}
+
+@keyframes review-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 768px) {
+  .review-ticker {
+    animation-duration: 110s;
+  }
+}

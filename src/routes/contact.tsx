@@ -21,7 +21,7 @@ export const Route = createFileRoute("/contact")({
       {
         property: "og:description",
         content:
-          "Calle Cólogan 3, Puerto de la Cruz, Tenerife. Open from 1:00 PM, closed Mondays.",
+          "Calle Cologan 3, Puerto de la Cruz, Tenerife. Open daily from 1:00 PM to 11:00 PM.",
       },
     ],
   }),
@@ -31,21 +31,7 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   const { t, language } = useLanguage();
 
-  const translatedDay = (day: string) => {
-    if (language === "en") return day;
-
-    const days: Record<string, string> = {
-      Monday: "Lunes",
-      Tuesday: "Martes",
-      Wednesday: "Miércoles",
-      Thursday: "Jueves",
-      Friday: "Viernes",
-      Saturday: "Sábado",
-      Sunday: "Domingo",
-    };
-
-    return days[day] ?? day;
-  };
+  const translatedDay = (day: string) => day;
 
   return (
     <>

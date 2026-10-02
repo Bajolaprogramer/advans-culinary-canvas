@@ -16,7 +16,7 @@ export const Route = createFileRoute("/reservations")({
       {
         name: "description",
         content:
-          "Reserve your table online at Advans Cafe Restaurante, Calle Cólogan 3, Puerto de la Cruz. Lunch and dinner service, closed Mondays.",
+          "Reserve your table online at Advans Cafe Restaurante, Calle Cólogan 3, Puerto de la Cruz. Open daily from 1:00 PM to 11:00 PM.",
       },
       {
         property: "og:title",
@@ -87,21 +87,7 @@ function ReservationsPage() {
   const label =
     "block text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground";
 
-  const translatedDay = (day: string) => {
-    if (language === "en") return day;
-
-    const days: Record<string, string> = {
-      Monday: "Lunes",
-      Tuesday: "Martes",
-      Wednesday: "Miércoles",
-      Thursday: "Jueves",
-      Friday: "Viernes",
-      Saturday: "Sábado",
-      Sunday: "Domingo",
-    };
-
-    return days[day] ?? day;
-  };
+  const translatedDay = (day: string) => day;
 
   return (
     <>

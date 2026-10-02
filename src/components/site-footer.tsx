@@ -8,21 +8,7 @@ import { useLanguage } from "@/i18n";
 export function SiteFooter() {
   const { t, language } = useLanguage();
 
-  const translatedDay = (day: string) => {
-    if (language === "en") return day;
-
-    const days: Record<string, string> = {
-      Monday: "Lunes",
-      Tuesday: "Martes",
-      Wednesday: "Miércoles",
-      Thursday: "Jueves",
-      Friday: "Viernes",
-      Saturday: "Sábado",
-      Sunday: "Domingo",
-    };
-
-    return days[day] ?? day;
-  };
+  const translatedDay = (day: string) => day;
 
   return (
     <footer className="border-t border-border/60 bg-card/40">
@@ -106,9 +92,7 @@ export function SiteFooter() {
               />
 
               <span>
-                {language === "es"
-                  ? "Cerrado los lunes · Abierto desde las 13:00"
-                  : "Closed Mondays · Open from 1:00 PM"}
+                Every day, 1:00 PM to 11:00 PM
               </span>
             </li>
           </ul>

@@ -39,49 +39,39 @@ export const SITE = {
 export const HOURS: { day: string; hours: string[] }[] = [
   {
     day: "Monday",
-    hours: ["Closed"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Tuesday",
-    hours: ["1:00 PM – 5:00 PM", "7:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Wednesday",
-    hours: ["1:00 PM – 5:00 PM", "7:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Thursday",
-    hours: ["1:00 PM – 5:00 PM", "7:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Friday",
-    hours: ["1:00 PM – 5:00 PM", "7:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Saturday",
-    hours: ["1:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
   {
     day: "Sunday",
-    hours: ["1:00 PM – 11:00 PM"],
+    hours: ["1:00 PM to 11:00 PM"],
   },
 ];
 
 export const RESERVATION_TIMES = [
-  "13:00",
-  "13:30",
-  "14:00",
-  "14:30",
-  "15:00",
-  "15:30",
-  "16:00",
-  "19:00",
-  "19:30",
-  "20:00",
-  "20:30",
-  "21:00",
-  "21:30",
-  "22:00",
+  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+  "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
+  "19:00", "19:30", "20:00", "20:30", "21:00", "21:30",
+  "22:00", "22:30",
 ];
 
 export const FEATURES = [
