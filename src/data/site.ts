@@ -2,7 +2,7 @@ export const SITE = {
   name: "Advans Cafe Restaurante",
   short: "Advans",
 
-  tagline: "Canarian roots. Mediterranean soul. Balkan fire.",
+  tagline: "Canarian roots. Mediterranean soul. Balkan touch.",
   taglineEs: "Raíces canarias. Alma mediterránea. Fuego balcánico.",
 
   addressLine: "Calle Cólogan 3",
