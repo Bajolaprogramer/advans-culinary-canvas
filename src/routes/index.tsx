@@ -16,7 +16,6 @@ import dia from "@/assets/dia.jpg.asset.json";
 import p1 from "@/assets/p1.jpg.asset.json";
 import p2 from "@/assets/p2.jpg.asset.json";
 import c1 from "@/assets/c1.jpg.asset.json";
-
 import { REVIEWS, SITE } from "@/data/site";
 import { useLanguage } from "@/i18n";
 
@@ -400,42 +399,7 @@ function Index() {
   </div>
 </section>
 
-      {/* Reviews */}
-      <section className="border-y border-border/60 bg-card/30 py-24">
-        <div className="mx-auto max-w-6xl px-5">
-          <div className="text-center">
-            <p className="overline">{t("guestWords")}</p>
-
-            <h2 className="mt-5 text-4xl sm:text-5xl">
-              {t("lovedPuerto")}
-            </h2>
-          </div>
-
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {REVIEWS.map((r) => (
-              <figure key={r.quote} className="card-lux p-8">
-                <div className="flex gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      size={14}
-                      className="fill-gold text-gold"
-                    />
-                  ))}
-                </div>
-
-                <blockquote className="mt-5 font-display text-xl leading-relaxed text-foreground/90">
-                  “{r.quote}”
-                </blockquote>
-
-                <figcaption className="mt-6 text-[0.65rem] uppercase tracking-[0.24em] text-muted-foreground">
-                  {r.author}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Gallery */}
       <section className="mx-auto max-w-6xl px-5 py-24">
