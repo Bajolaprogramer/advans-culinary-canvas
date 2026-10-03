@@ -23,11 +23,11 @@ export const SITE = {
   socials: [
     {
       label: "Instagram",
-      href: "https://www.instagram.com/",
+      href: "https://www.instagram.com/advans_tenerife/",
     },
     {
       label: "Facebook",
-      href: "https://www.facebook.com/",
+      href: "https://www.facebook.com/CreperiaAdvans/",
     },
     {
       label: "TikTok",
