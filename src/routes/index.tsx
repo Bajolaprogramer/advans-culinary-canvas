@@ -278,7 +278,7 @@ function Index() {
       <section className="relative flex min-h-[92vh] items-center justify-center overflow-hidden">
   <div className="absolute inset-0">
     <img
-      src="/hero.jpg"
+      src="/hero1.jpg"
       alt="ADVANS Café Restaurante in Puerto de la Cruz, Tenerife"
       className="slow-zoom h-full w-full object-cover object-center"
     />
